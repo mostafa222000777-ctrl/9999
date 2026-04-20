@@ -306,21 +306,29 @@
     <script>
         const correctPassword = '822007';
         
-        function checkPassword() {
-            const input = document.getElementById('passwordInput').value;
-            const errorMsg = document.getElementById('errorMsg');
-            
-            if (input === correctPassword) {
-                window.location.href = "momomo.html";
-                startFireworks();
-            } else {
-                errorMsg.style.display = 'block';
-                document.getElementById('passwordInput').value = '';
-                setTimeout(() => {
-                    errorMsg.style.display = 'none';
-                }, 3000);
-            }
-        }
+       function checkPassword() {
+    const input = document.getElementById('passwordInput').value;
+    const errorMsg = document.getElementById('errorMsg');
+
+    if (input === correctPassword) {
+        
+        // --- السطر اللي بيبعت الإشارة لجوجل ---
+        gtag('event', 'password_success', {
+            'event_category': 'login',
+            'event_label': 'Correct Password Entered'
+        });
+        // ------------------------------------
+
+        window.location.href = "momomo.html";
+        startFireworks();
+    } else {
+        errorMsg.style.display = 'block';
+        document.getElementById('passwordInput').value = '';
+        setTimeout(() => {
+            errorMsg.style.display = 'none';
+        }, 3000);
+    }
+}
         
         // Allow Enter key
         document.getElementById('passwordInput').addEventListener('keypress', function(e) {
